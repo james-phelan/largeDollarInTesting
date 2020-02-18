@@ -1,7 +1,7 @@
 const inclLength = 10
 
 // Connection URL
-const url = 'mongodb://localhost:27019';
+const url = 'mongodb://HOST:PORT';
 
 // Database Name
 const dbName = 'POCDB';
