@@ -1,4 +1,4 @@
-const inclLength = 10
+const inclLength = 1000
 
 // Connection URL
 const url = 'mongodb://HOST:PORT';
