@@ -35,7 +35,7 @@ const findDocuments = function(db, callback) {
     collection.countDocuments(query, (err, res) => {
         assert.equal(null, err);
         console.log("counting docs", res);
-    c   allback(res);
+        callback(res);
   });
 }
 
