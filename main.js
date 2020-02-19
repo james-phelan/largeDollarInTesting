@@ -1,4 +1,4 @@
-const threads = 50
+const threads = 10
 const { Worker } = require("worker_threads");
 
 for (i = 0; i < threads; i++) {
