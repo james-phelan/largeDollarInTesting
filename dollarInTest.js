@@ -24,13 +24,12 @@ const findDocuments = function(db, callback) {
 
     // Get the POCCOLL collection
     const collection = db.collection('POCCOLL');
-    // Find some documents
-    collection.find(query).toArray(function(err, docs) {
-        assert.equal(err, null);
-        console.log("Found the following records");
-        console.log(docs)
-        callback(docs);
-    });
+    // count some documents   
+    collection.countDocuments(query, (err, res) => {
+        assert.equal(null, err);
+        console.log("counting docs", res);
+        callback(res);
+  });
 }
 
 const MongoClient = require('mongodb').MongoClient;
