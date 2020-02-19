@@ -1,48 +1,39 @@
-const inclLength = 1000
-
-// Connection URL
-const url = 'mongodb://HOST:PORT';
-
-// Database Name
+const inlLength = 1000
+const numFinds = 100
+const assert = require('assert');
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
 const dbName = 'POCDB';
+const client = new MongoClient(url);
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-const findDocuments = function(db, callback) {
-
-    // Build the query
+function queryBuilder(l) {
     var filterArr = [];
-    for (i = 0; i < inclLength; i++) {
+    for (i = 0; i < l; i++) {
+        field1 = getRandomInt(50);
+        field2 = getRandomInt(50);
         filterArr.push({
-            w: getRandomInt(50),
-            i: getRandomInt(50)
-        });
+            w: field1,
+            i: field2
+        })
     }
-    var query = { "_id": { "$in": filterArr } }
-
-    // Get the POCCOLL collection
-    const collection = db.collection('POCCOLL');
-    // count some documents   
-    collection.countDocuments(query, (err, res) => {
-        assert.equal(null, err);
-        console.log("counting docs", res);
-        callback(res);
-  });
+    return query = { "_id": { "$in": filterArr } }
 }
 
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-
-const client = new MongoClient(url);
 client.connect(function(err) {
+    const db = client.db(dbName)
+    const collection = db.collection('POCCOLL');
+    for (j = 0; j < numFinds; j++) {
+        query = queryBuilder(inlLength)
+        collection.countDocuments(query,
+            function(error, result) {
+                console.log("Documents Found:", result);
+            }
+        )
+    }
     assert.equal(null, err);
-    console.log("Connected correctly to server");
-
-    const db = client.db(dbName);
-
-    findDocuments(db, function() {
-        client.close();
-    });
+    client.close();
 });
