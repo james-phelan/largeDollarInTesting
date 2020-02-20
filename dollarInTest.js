@@ -1,8 +1,8 @@
-const inlLength = 1000
-const numFinds = 100
+const inlLength = 1000 // How many $in predicates
+const numFinds = 100 // How many finds will be run per connection
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+const url = <URI>; // Update with the actual connection string.
 const dbName = 'POCDB';
 const client = new MongoClient(url);
 
